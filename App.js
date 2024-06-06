@@ -4,6 +4,8 @@ import ImageViewer from "./.expo/components/ImageViewer";
 import Button from "./.expo/components/Button";
 import * as ImagePicker from "expo-image-picker";
 import { useState } from "react";
+import CircleButton from "./.expo/components/CircleButton";
+import IconButton from "./.expo/components/IconButton";
 
 const PlaceholderImage = require("./assets/images/background-image.png");
 
@@ -26,6 +28,18 @@ export default function App() {
     }
   };
 
+  const onReset = () => {
+    setShowAppOptions(false);
+  };
+
+  const onAddSticker = () => {
+    // we will implement this later
+  };
+
+  const onSaveImageAsync = async () => {
+    // we will implement this later
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
@@ -33,7 +47,13 @@ export default function App() {
       </View>
       <View style={styles.footerContainer}>
         {showAppOptions ? (
-          <View />
+          <View style={styles.optionsContainer}>
+            <View style={styles.optionsRow}>
+              <IconButton icon="refresh" label="Reset" onPress={onReset} />
+              <CircleButton onPress={onAddSticker} />
+              <IconButton icon="save-alt" label="Save" onPress={onSaveImageAsync} />
+            </View>
+          </View>
         ) : (
           <View style={styles.footerContainer}>
             <Button theme="primary" label="Choose a photo" onPress={pickImageAsync} />
@@ -55,5 +75,17 @@ const styles = StyleSheet.create({
   imageContainer: {
     flex: 1,
     paddingTop: 58,
+  },
+  footerContainer: {
+    flex: 1 / 3,
+    alignItems: "center",
+  },
+  optionsContainer: {
+    position: "absolute",
+    bottom: 80,
+  },
+  optionsRow: {
+    alignItems: "center",
+    flexDirection: "row",
   },
 });
